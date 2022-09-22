@@ -21,21 +21,23 @@
 		<th>Nome</th>
 		<th>Email</th>
 		<th>Celular</th>
+		<th>Senha</th>
 		<th>Sexo</th>
 		<th>Cpf</th>
 		<th>Editar</th>
 		<th>Excluir</th>
 		</tr>
 		
-		<c:forEach items= "${list}" var="paciente">
+		<c:forEach items="${list}" var="paciente">
 			<tr>
-				<td>${com.edaus.bean.Paciente.getid()}</td>
-				<td>${com.edaus.bean.Paciente.getnome()}</td>
-				<td>${com.edaus.bean.Paciente.getemail()}</td>
-				<td>${com.edaus.bean.Paciente.getcelular()}</td>
-				<td>${com.edaus.bean.Paciente.getsexo()}</td>
-				<td>${com.edaus.bean.Paciente.getcpf()}</td>
-				<td><a href="editarform.jsp?id=${paciente.getid()}">Editar</a></td>
+				<td><c:out value="${paciente.id}" /></td>
+				<td><c:out value="${paciente.nome}" /></td>
+				<td><c:out value="${paciente.email}" /></td>
+				<td><c:out value="${paciente.celular}" /></td>
+				<td><c:out value="${paciente.senha}" /></td>
+				<td><c:out value="${paciente.sexo}" /></td>
+				<td><c:out value="${paciente.cpf}" /></td>
+				<td><a href="editarform.jsp?id=${paciente.id}">Editar</a></td>
 				<td><a href="#">Excluir</a></td>
 			</tr>
 		</c:forEach>

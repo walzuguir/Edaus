@@ -2,7 +2,7 @@ package com.edaus.bean;
 
 public class Paciente {
 	
-	private int ID;
+	private int id;
 	private String nome;
 	private String email;
 	private String celular;
@@ -11,10 +11,15 @@ public class Paciente {
 	private String cpf;
 	
 	public int getid() {
-		return ID;
+		return this.id;
 	}
+	
+	public String getidString() {
+		return String.valueOf(this.id);
+	}
+	
 	public void setid(int id) {
-		this.ID = id;
+		this.id = id;
 	}
 	public String getnome() {
 		return nome;

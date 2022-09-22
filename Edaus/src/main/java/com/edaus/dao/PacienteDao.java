@@ -28,14 +28,13 @@ public class PacienteDao {
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("INSERT INTO paciente (id, nome, email, celular, senha, sexo, cpf) VALUES (?,?,?,?,?,?,?)");
-			ps.setInt(1, u.getid());
-			ps.setString(2, u.getnome());
-			ps.setString(3, u.getemail());
-			ps.setString(4, u.getcelular());
-			ps.setString(5, u.getsenha());
-			ps.setString(6, u.getsexo());
-			ps.setString(7, u.getcpf());
+			PreparedStatement ps = con.prepareStatement("INSERT INTO paciente (nome, email, celular, senha, sexo, cpf) VALUES (?,?,?,?,?,?)");
+			ps.setString(1, u.getnome());
+			ps.setString(2, u.getemail());
+			ps.setString(3, u.getcelular());
+			ps.setString(4, u.getsenha());
+			ps.setString(5, u.getsexo());
+			ps.setString(6, u.getcpf());
 			status = ps.executeUpdate();
 		}catch (Exception e) {
 			System.out.println(e);
@@ -47,16 +46,15 @@ public class PacienteDao {
 	
 	
 	public static Paciente getRegistroById(int id) {
-		Paciente paciente = null;
+		Paciente paciente = new Paciente();
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM paciente WHRE id=?");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM paciente WHERE id = ?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				paciente = new Paciente();
 				paciente.setid(rs.getInt("id"));
 				paciente.setcelular(rs.getString("celular"));
 				paciente.setemail(rs.getString("email"));
@@ -65,27 +63,28 @@ public class PacienteDao {
 				paciente.setsexo(rs.getString("sexo"));
 				paciente.setcpf(rs.getString("cpf"));
 			}
+			return paciente;
 		} catch (Exception e) {
 			System.out.println(e);
+			return null;
 		}
-		
-		return paciente;
 	}
 	
-	public static int updatePaciente(Paciente u) {
+	public static int updatePaciente(Paciente p) {
 		int status = 0;
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("UPDATE paciente SET nome=?, " + "email=?, celular=?, senha=?, sexo=?, cpf=? WHERE id=?");
+			PreparedStatement ps = (PreparedStatement) con.prepareStatement("UPDATE paciente SET nome=?, email=?,"
+					+ " celular=?, senha=?, sexo=?, cpf=? WHERE id=?");
 			
-			ps.setString(1, u.getnome());
-			ps.setString(2, u.getemail());
-			ps.setString(3, u.getcelular());
-			ps.setString(4, u.getsenha());
-			ps.setString(5, u.getsexo());
-			ps.setString(6, u.getcpf());
-			ps.setInt(7, u.getid());
+			ps.setString(1, p.getnome());
+			ps.setString(2, p.getemail());
+			ps.setString(3, p.getcelular());
+			ps.setString(4, p.getsenha());
+			ps.setString(5, p.getsexo());
+			ps.setString(6, p.getcpf());
+			ps.setInt(7, p.getid());
 			status = ps.executeUpdate();
 		}catch (Exception e) {
 			System.out.println(e);
@@ -98,7 +97,7 @@ public class PacienteDao {
 		
 		try {
 			Connection con = getConnection();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM paciente WHERE id");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM paciente");
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -106,8 +105,9 @@ public class PacienteDao {
 				paciente.setid(rs.getInt("id"));
 				paciente.setnome(rs.getString("nome"));
 				paciente.setemail(rs.getString("email"));
+				paciente.setcelular(rs.getString("celular"));
 				paciente.setsenha(rs.getString("senha"));
-				paciente.setsenha(rs.getString("sexo"));
+				paciente.setsexo(rs.getString("sexo"));
 				paciente.setcpf(rs.getString("cpf"));
 				list.add(paciente);
 			}
@@ -117,3 +117,4 @@ public class PacienteDao {
 		return list;
 	}
 }	 
+

@@ -1,11 +1,11 @@
+<a href="VerPacientes.jsp">Voltar</a>
+
+<br>
+
 <h1>Adicionar novo paciente</h1>
 
 <form action="addpaciente.jsp" method="post">
 	<table>
-		<tr>
-			<td>Id:</td>
-			<td><input type = "text" name = "id" /></td>
-		</tr>
 		<tr>
 			<td>Nome:</td>
 			<td><input type = "text" name = "nome" /></td>
@@ -24,7 +24,12 @@
 		</tr>
 		<tr>
 			<td>Sexo:</td>
-			<td><input type = "text" name = "sexo" /></td>
+            <td>
+                <select name="sexo">
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
+                </select>
+            </td>
 		</tr>
 		<tr>
 			<td>Cpf:</td>
